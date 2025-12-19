@@ -1,0 +1,30 @@
+{ inputs, lib, pkgs, username, ...}: {
+	imports = [
+		./modules/config/hm/shells/zsh.nix
+		./modules/config/hm/git.nix
+	];
+
+	
+	home.username = username;
+	home.homeDirectory = "/home/${username}";
+	home.stateVersion = "25.11"; 
+ 
+
+ 	home.packages = with pkgs; [];
+	#Allow home manager to self manage.
+	programs.home-manager.enable = true;
+
+	home.file = {
+		".config/nixpkgs/config.nix".source = dotfiles/.config/nixpkgs/config.nix;
+	};
+			
+	# home.packages = with pkgs; [
+	# 	neovim
+	# 	vscode-fhs
+	# 	nodejs
+	# 	gcc
+	# 	nixpkgs-fmt
+	# ];
+
+
+}
