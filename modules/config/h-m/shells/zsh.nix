@@ -12,7 +12,7 @@
 				"sudo"
 				"vscode"
 			];
-			theme = "catppuccin_mocha";
+			theme = "catppuccin-mocha";
 		};
 
 		shellAliases = {

@@ -2,8 +2,6 @@
 	imports = [
 		./modules/config/h-m/shells/zsh.nix
 		./modules/config/h-m/git.nix
-		./modules/config/h-m/terminal/alacrity.nix
-		./modules/config/h-m/terminal/kitty.nix
 		# TODO: ./modules/config/h-m/browsers/zen.nix
 	];
 	
