@@ -15,7 +15,7 @@
 
 	#Allow unfree (non-faos)
 	nixpkgs.config = {
-		allowUnFree = true;
+		allowUnfree = true;
 	};
 
 	#Enable networking
@@ -53,7 +53,7 @@
 	programs.firefox.enable = true;
 
 
-	home-manager.users.${username}.nixpkgs.config = {allowUnfree = true; };
+	home-manager.users.${username}.nixpkgs.config = { allowUnfree = true; };
 	home-manager.useUserPackages = true;
 
 	#passing arguments to home.nix :D
