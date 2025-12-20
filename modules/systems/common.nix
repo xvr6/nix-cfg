@@ -47,7 +47,7 @@
 	#TODO: remove these
 	# default apps needed for now:
 	environment.systemPackages = with pkgs; [
-		vims
+		vim
 		neovim
 		wget
 		vscode-fhs
