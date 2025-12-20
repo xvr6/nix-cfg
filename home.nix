@@ -2,12 +2,12 @@
 	imports = [
 		./modules/config/h-m/shells/zsh.nix
 		./modules/config/h-m/git.nix
-		./modules/config/h-m/browsers/zen.nix
+		# TODO: ./modules/config/h-m/browsers/zen.nix
 	];
 	
 	home.username = username;
 	home.homeDirectory = "/home/${username}";
-	home.stateVersion = "25.11"; 
+	home.stateVersion = "25.11";
  
 
  	home.packages = with pkgs; [];
