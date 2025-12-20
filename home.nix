@@ -14,7 +14,7 @@
 	#Allow home manager to self manage.
 	programs.home-manager.enable = true;
 
-	home.file = {
+	home.file = { #manually move config file from this flake to location expected by system
 		".config/nixpkgs/config.nix".source = dotfiles/.config/nixpkgs/config.nix;
 	};
 			
