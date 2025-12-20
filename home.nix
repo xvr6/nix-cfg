@@ -2,8 +2,8 @@
 	imports = [
 		./modules/config/h-m/shells/zsh.nix
 		./modules/config/h-m/git.nix
+		./modules/config/h-m/browsers/zen.nix
 	];
-
 	
 	home.username = username;
 	home.homeDirectory = "/home/${username}";
