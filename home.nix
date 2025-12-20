@@ -1,7 +1,7 @@
 { inputs, lib, pkgs, username, ...}: {
 	imports = [
-		./modules/config/hm/shells/zsh.nix
-		./modules/config/hm/git.nix
+		./modules/config/h-m/shells/zsh.nix
+		./modules/config/h-m/git.nix
 	];
 
 	
