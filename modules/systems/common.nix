@@ -48,7 +48,6 @@
 	# default apps needed for now:
 	environment.systemPackages = with pkgs; [
 		vim
-		neovim
 		wget
 		vscode-fhs
 	];
