@@ -23,7 +23,7 @@
 		};
 
 		# for mac
-		nix-darwin {
+		nix-darwin = {
 			url = "github:nix-darwin/nix-darwin/master";
 			inputs = {
 				nixpkgs.follows = "nixpkgs";
@@ -36,7 +36,7 @@
 
 	};
 
-outputs = { self, nix-darwin nixpkgs, home-manager, ... } @inputs: 
+outputs = { self, nix-darwin, nixpkgs, home-manager, ... } @inputs: 
 	let
 		system = "";
 		username = "xvr6";
@@ -94,5 +94,5 @@ outputs = { self, nix-darwin nixpkgs, home-manager, ... } @inputs:
 				];
 			};
 		};
-	}
+	};
 }
