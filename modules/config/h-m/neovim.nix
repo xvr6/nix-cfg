@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   #Install neovim and dependencies
   home.packages = with pkgs; [ #dependencies
 
