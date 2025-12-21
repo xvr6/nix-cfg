@@ -74,7 +74,6 @@ outputs = { self, darwin, nixpkgs, home-manager, ... } @inputs:
 
 # original UTM VM on my mac
 			nixbook-pro = nixpkgs.lib.nixosSystem {
-				inherit username;
 				system = "aarch64-linux";
 				specialArgs = { inherit inputs system username; };
 				modules = [
@@ -90,7 +89,6 @@ outputs = { self, darwin, nixpkgs, home-manager, ... } @inputs:
 
 # Windows Hyper-V VM
 			win-NixVM = nixpkgs.lib.nixosSystem {
-				username = "xvr6";
 				system = "x86_64-linux";
 				specialArgs = { inherit inputs system username; };
 				modules = [
