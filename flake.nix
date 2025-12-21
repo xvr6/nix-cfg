@@ -30,6 +30,7 @@
 
 outputs = { self, nixpkgs, home-manager, ... }@inputs: 
 	let
+		system = "";
 		username = "xvr6";
 	in {
 		nixosConfigurations = {
