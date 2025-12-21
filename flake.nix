@@ -28,51 +28,40 @@
 
 	};
 
-	outputs = {nixpkgs, ...} @inputs: [
+outputs = { self, nixpkgs, home-manager, ... }@inputs: {
 	let
-		# system = "aarch64-linux";
-		system = "x86_64-linux";
+		systemNixbookPro = "aarch64-linux";
+		systemWinNixVM = "x86_64-linux";
 		username = "xvr6";
 	in {
 		nixosConfigurations = {
 			nixbook-pro = nixpkgs.lib.nixosSystem {
-				# pass args into modules
-				specialArgs = {inherit inputs; inherit system; inherit username;};
-				inherit system; #what does this do?
-
+				specialArgs = { inherit inputs systemNixbookPro username; };
+				system = systemNixbookPro;
 				modules = [
 					./modules/systems/graphical.nix
-					#./modules/systems/nixbook-pro/configuration.nix
-					./modules/systems/win-nixvm/configuration.nix
-					r
+					./modules/systems/nixbook-pro/configuration.nix
+					# ./modules/systems/win-nixvm/configuration.nix
+					({ config, ... }: {
 						home-manager.users.${username} = {
-							imports = [./home.nix];
+							imports = [ ./home.nix ];
 						};
-					}
+					})
+				];
+			};
+			win-NixVM = nixpkgs.lib.nixosSystem {
+				specialArgs = { inherit inputs systemWinNixVM username; };
+				system = systemWinNixVM;
+				modules = [
+					./modules/systems/graphical.nix
+					./modules/systems/win-nixvm/configuration.nix
+					({ config, ... }: {
+						home-manager.users.${username} = {
+							imports = [ ./home.nix ];
+						};
+					})
 				];
 			};
 		};
-	}
-	let 
-		system = "x84_64-linux";
-		username = "xvr6";
-	in {
-		nixosConfigurations += {
-			win-NixVM = nixpkgs.lib.nixosSystem {
-				specialArgs = {inherit inputs; inherit system; inherit username;};
-				inherit system;
-
-				modules = [
-					./modules/systems/graphical.nix
-					./modules/systems/win-nixvm/configuration.nix
-					{
-						home-manager.users.${username} = {imports = [./home.nix]; 
-						};
-					}
-				];
-				
-			};
-		}
 	};
-	];
 }
