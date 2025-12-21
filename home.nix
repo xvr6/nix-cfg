@@ -1,6 +1,6 @@
 { inputs, lib, pkgs, username, ...}: {
 	imports = [
-		./modules/config/h-m/neovim.nix
+		./modules/config/h-m/nixvim.nix
 		./modules/config/h-m/shells/zsh.nix
 		./modules/config/h-m/git.nix
 		# TODO: ./modules/config/h-m/browsers/zen.nix
