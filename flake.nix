@@ -30,7 +30,8 @@
 
 	outputs = {nixpkgs, ...} @inputs: 
 	let
-		system = "aarch64-linux";
+		# system = "aarch64-linux";
+		system = "x86_64-linux";
 		username = "xvr6";
 	in {
 		nixosConfigurations = {
@@ -41,7 +42,8 @@
 
 				modules = [
 					./modules/systems/graphical.nix
-					./modules/systems/nixbook-pro/configuration.nix
+					#./modules/systems/nixbook-pro/configuration.nix
+					./modules/systems/win-nixvm/configuration.nix
 					{
 						home-manager.users.${username} = {
 							imports = [./home.nix];
