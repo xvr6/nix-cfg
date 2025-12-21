@@ -1,5 +1,5 @@
 {
-	description = "NixOS";
+	description = "flakes :3";
 	inputs = {
 		nixpkgs.url = "nixpkgs/nixos-25.11";
 		home-manager = {
@@ -22,19 +22,48 @@
 			};
 		};
 
+		# for mac
+		nix-darwin {
+			url = "github:nix-darwin/nix-darwin/master";
+			inputs = {
+				nixpkgs.follows = "nixpkgs";
+			};
+		};
+
 		self = {
 			submodules = true;
 		};	
 
 	};
 
-outputs = { self, nixpkgs, home-manager, ... }@inputs: 
+outputs = { self, nix-darwin nixpkgs, home-manager, ... } @inputs: 
 	let
 		system = "";
 		username = "xvr6";
 	in {
+
+# nix-darwin
+		darwinConfigurations."nixbook" = nix-darwin.lib.darwinSystem {
+			username = "prectriv";
+			system = "aarch64-darwin";
+			specialArgs = {inherit inputs system username; };
+
+			modules = [ 
+				./modules/systems/graphical.nix
+				./modules/systems/nix-darwin/configuration.nix
+				
+					({ config, ... }: {
+						home-manager.users.${username} = {
+							imports = [ ./home.nix ];
+						};
+					})
+			];
+		};
+
 		nixosConfigurations = {
+# original UTM VM on my mac
 			nixbook-pro = nixpkgs.lib.nixosSystem {
+				username = "xvr6";
 				system = "aarch64-linux";
 				specialArgs = { inherit inputs system username; };
 				modules = [
@@ -48,7 +77,10 @@ outputs = { self, nixpkgs, home-manager, ... }@inputs:
 					})
 				];
 			};
+
+# Windows Hyper-V VM
 			win-NixVM = nixpkgs.lib.nixosSystem {
+				username = "xvr6";
 				system = "x86_64-linux";
 				specialArgs = { inherit inputs system username; };
 				modules = [
@@ -62,5 +94,5 @@ outputs = { self, nixpkgs, home-manager, ... }@inputs:
 				];
 			};
 		};
-	};
+	}
 }

@@ -41,6 +41,9 @@
 			isNormalUser = true;
 			description = username;
 			extraGroups = ["wheel" "podman"];
+			openssh.authorizedKeys.keys = [
+				"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHJuKddbB35VXhD45nRSu6mkGkeZOqup8Cnmfg2dykGP xvr6.dev"
+			];
 		};
 	};
 
