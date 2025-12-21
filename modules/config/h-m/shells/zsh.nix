@@ -22,10 +22,19 @@
 			nrt = "sudo nixos-rebuild test --flake ~/.dotfiles";
 		};
 	};
+ 	programs.ghostty = {
+		enable = true;
+		settings = {
+			theme = "tokyonight-night";
+		};
+
+	};
+
 	
 	programs.oh-my-posh = {
 		enable = true;
-		useTheme = "catppuccin-mocha";
+		enableZshIntegration = true;
+		useTheme = "catppuccin_mocha";
 	};
 
 }

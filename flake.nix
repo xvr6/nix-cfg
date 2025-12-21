@@ -80,9 +80,12 @@ outputs = { self, darwin, nixpkgs, home-manager, ... } @inputs:
 					./modules/systems/graphical.nix
 					./modules/systems/nixbook-pro/configuration.nix
 					({ config, ... }: {
-						home-manager.users.${username} = {
-							imports = [ ./home.nix ];
-						};
+						home-manager = {
+							backupFileExtension = "backup";
+							users.${username} = {
+								imports = [ ./home.nix ];
+							};
+						}; 
 					})
 				];
 			};
