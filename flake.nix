@@ -46,7 +46,7 @@
 outputs = { self, darwin, nixpkgs, home-manager, ... } @inputs: 
 	let
 		system = "aarch64-darwin";
-		username = "prectriv";
+		username = "xvr6";
 	in {
 
 # nix-darwin
@@ -74,7 +74,7 @@ outputs = { self, darwin, nixpkgs, home-manager, ... } @inputs:
 
 # original UTM VM on my mac
 			nixbook-pro = nixpkgs.lib.nixosSystem {
-				username = "xvr6";
+				inherit username;
 				system = "aarch64-linux";
 				specialArgs = { inherit inputs system username; };
 				modules = [
