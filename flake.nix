@@ -2,6 +2,18 @@
 	description = "flakes :3";
 	inputs = {
 		nixpkgs.url = "nixpkgs/nixos-25.11";
+		
+		# for mac
+		darwin = {
+			url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
+			inputs = {
+				nixpkgs.follows = "nixpkgs";
+				# home-manager.follows = "home-manager";
+
+			};
+		};
+
+		
 		home-manager = {
 			url = "github:nix-community/home-manager/release-25.11";
 			inputs.nixpkgs.follows = "nixpkgs";	
@@ -19,16 +31,11 @@
 				# to have it up-to-date or simply don't specify the nixpkgs input
 				nixpkgs.follows = "nixpkgs";
 				home-manager.follows = "home-manager";
+
 			};
 		};
 
-		# for mac
-		nix-darwin = {
-			url = "github:nix-darwin/nix-darwin/master";
-			inputs = {
-				nixpkgs.follows = "nixpkgs";
-			};
-		};
+
 
 		self = {
 			submodules = true;
@@ -36,31 +43,35 @@
 
 	};
 
-outputs = { self, nix-darwin, nixpkgs, home-manager, ... } @inputs: 
+outputs = { self, darwin, nixpkgs, home-manager, ... } @inputs: 
 	let
-		system = "";
-		username = "xvr6";
+		system = "aarch64-darwin";
+		username = "prectriv";
 	in {
 
 # nix-darwin
-		darwinConfigurations."nixbook" = nix-darwin.lib.darwinSystem {
-			username = "prectriv";
-			system = "aarch64-darwin";
-			specialArgs = {inherit inputs system username; };
-
-			modules = [ 
-				./modules/systems/graphical.nix
-				./modules/systems/nix-darwin/configuration.nix
+		darwinConfigurations = {
+			nixbook = darwin.lib.darwinSystem {
+				inherit system;
+				# username = "prectriv";
 				
-					({ config, ... }: {
-						home-manager.users.${username} = {
-							imports = [ ./home.nix ];
-						};
-					})
-			];
-		};
+				specialArgs = {inherit inputs system; };
 
+				modules = [ 
+					./modules/config/h-m/shells/zsh.nix
+					./modules/systems/nix-darwin/configuration.nix
+					
+						# ({ config, ... }: {
+						# 	home-manager.users.${username} = {
+						# 		imports = [ ./home.nix ];
+						# 	};
+						# })
+				];
+			};
+		};
+		
 		nixosConfigurations = {
+
 # original UTM VM on my mac
 			nixbook-pro = nixpkgs.lib.nixosSystem {
 				username = "xvr6";
@@ -69,7 +80,6 @@ outputs = { self, nix-darwin, nixpkgs, home-manager, ... } @inputs:
 				modules = [
 					./modules/systems/graphical.nix
 					./modules/systems/nixbook-pro/configuration.nix
-					# ./modules/systems/win-nixvm/configuration.nix
 					({ config, ... }: {
 						home-manager.users.${username} = {
 							imports = [ ./home.nix ];

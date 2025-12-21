@@ -12,6 +12,7 @@
  
 
  	home.packages = with pkgs; [];
+	
 	#Allow home manager to self manage.
 	programs.home-manager.enable = true;
 
