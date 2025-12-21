@@ -28,7 +28,7 @@
 
 	};
 
-outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+outputs = { self, nixpkgs, home-manager, ... }@inputs: 
 	let
 		systemNixbookPro = "aarch64-linux";
 		systemWinNixVM = "x86_64-linux";
