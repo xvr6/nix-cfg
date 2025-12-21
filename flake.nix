@@ -30,14 +30,12 @@
 
 outputs = { self, nixpkgs, home-manager, ... }@inputs: 
 	let
-		systemNixbookPro = "aarch64-linux";
-		systemWinNixVM = "x86_64-linux";
 		username = "xvr6";
 	in {
 		nixosConfigurations = {
 			nixbook-pro = nixpkgs.lib.nixosSystem {
-				specialArgs = { inherit inputs systemNixbookPro username; };
-				system = systemNixbookPro;
+				system = "aarch64-linux";
+				specialArgs = { inherit inputs system username; };
 				modules = [
 					./modules/systems/graphical.nix
 					./modules/systems/nixbook-pro/configuration.nix
@@ -50,8 +48,8 @@ outputs = { self, nixpkgs, home-manager, ... }@inputs:
 				];
 			};
 			win-NixVM = nixpkgs.lib.nixosSystem {
-				specialArgs = { inherit inputs systemWinNixVM username; };
-				system = systemWinNixVM;
+				system = "x86_64-linux";
+				specialArgs = { inherit inputs system username; };
 				modules = [
 					./modules/systems/graphical.nix
 					./modules/systems/win-nixvm/configuration.nix
