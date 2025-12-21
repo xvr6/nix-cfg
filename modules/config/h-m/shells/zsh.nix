@@ -12,7 +12,6 @@
 				"sudo"
 				"vscode"
 			];
-			theme = "catppuccin-mocha";
 		};
 
 		shellAliases = {
@@ -23,4 +22,10 @@
 			nrt = "sudo nixos-rebuild test --flake ~/.dotfiles";
 		};
 	};
+	
+	programs.oh-my-posh = {
+		enable = true;
+		useTheme = "catppuccin-mocha";
+	};
+
 }
