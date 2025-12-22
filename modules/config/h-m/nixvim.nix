@@ -18,6 +18,14 @@
 			openOnSetup = true;
 			openOnSetupFile = true;
 		};
+		lsp = {
+			enable = true;
+		};
+		
+		lsp-status = {
+			enable = true;
+		};
+		
 	};
 
   };

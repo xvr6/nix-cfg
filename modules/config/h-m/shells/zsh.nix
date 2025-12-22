@@ -15,7 +15,6 @@
 		};
 
 		shellAliases = {
-			vi = "nvim";
 			drs = "sudo darwin-rebuild switch --flake ~/.dotfiles#nixbook";
 			hai = "echo hai :3";
 			nrs = "sudo nixos-rebuild switch --flake ~/.dotfiles";
