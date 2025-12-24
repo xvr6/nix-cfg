@@ -1,8 +1,8 @@
 { inputs, lib, pkgs, username, ...}: {
 	imports = [
-		./modules/config/h-m/nixvim.nix
-		./modules/config/h-m/shells/zsh.nix
-		./modules/config/h-m/git.nix
+		./modules/home-manager/nixvim.nix
+		./modules/home-manager/shells/zsh.nix
+		./modules/home-manager/git.nix
 		# TODO: ./modules/config/h-m/browsers/zen.nix
 	];
 	

@@ -60,7 +60,7 @@ outputs = { self, darwin, nixpkgs, home-manager, ... } @inputs:
 				specialArgs = {inherit inputs system; };
 
 				modules = [ 
-					./modules/config/h-m/shells/zsh.nix
+					./modules/hone-manager/shells/zsh.nix
 					./modules/systems/nix-darwin/configuration.nix
 					
 						# ({ config, ... }: {
