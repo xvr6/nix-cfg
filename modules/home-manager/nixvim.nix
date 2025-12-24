@@ -25,7 +25,9 @@
 		lsp-status = {
 			enable = true;
 		};
-		
+		web-devicons = {
+			enable = true;	
+		};	
 	};
 
   };

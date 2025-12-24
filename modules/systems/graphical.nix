@@ -1,4 +1,4 @@
-{ pkgs, ...}: {
+{ pkgs, username, ...}: {
 	imports = [
 		./common.nix
 	];
@@ -25,5 +25,11 @@
 
 	#desktop/window managers or whatchamacallet
 	services.displayManager.sddm.enable = true;
+	services.displayManager.sddm.autoLogin.relogin = true;
+	services.displayManager.autoLogin.user = username;
+	services.displayManager.autoLogin.enable = true;
 	services.desktopManager.plasma6.enable = true;
+	
+
+
 }
