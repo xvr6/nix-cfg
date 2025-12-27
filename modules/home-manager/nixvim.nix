@@ -1,6 +1,6 @@
 { inputs, pkgs, ... }: {
-  #Install neovim and dependencies
-  home.packages = with pkgs; [ #dependencies
+  #Install nixvim and dependencies
+  home.packages = with pkgs; [ #dependencies... none for now?
   ];
 
  imports = [
@@ -12,20 +12,32 @@
     viAlias = true;
     vimAlias = true;
   
+	#language server cfg
+  	lsp.servers = {
+		inlayHints.enable = true;
+
+		"*".config = {
+				# Global Defaults
+				root_markets = [".git"];
+			};
+
+		"vue_ls" = {
+			enable = true;
+			config = {
+				filetypes = ["vue"];
+			};
+		};
+	
+	};
+
 	plugins = {
 		nvim-tree = {
 			enable = true;
 			openOnSetup = true;
 			openOnSetupFile = true;
 		};
-		lsp = {
-			enable = true;
-		};
 		
-		lsp-status = {
-			enable = true;
-		};
-		web-devicons = {
+		web-devicons = { # required by nvim-tree
 			enable = true;	
 		};	
 	};
