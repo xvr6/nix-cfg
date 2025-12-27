@@ -97,7 +97,7 @@ outputs = { self, darwin, nixpkgs, home-manager, ... } @inputs:
 				system = "x86_64-linux";
 				specialArgs = { inherit inputs system username; };
 				modules = [
-					./modules/systems/common.nix
+					./modules/systems/graphical.nix
 					./modules/systems/win-nixvm/configuration.nix
 					({ config, ... }: {
 						home-manager.users.${username} = {
