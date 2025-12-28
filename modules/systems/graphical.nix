@@ -17,19 +17,22 @@
 	# Enable touchpad support (enabled default in most desktopManager).
 	# services.libinput.enable = true;
 
-
-	#Font
-	fonts.packages = with pkgs; [
-		nerd-fonts.jetbrains-mono
-	];
-
-	#desktop/window managers or whatchamacallet
+    #desktop/window managers or whatchamacallet
 	services.displayManager.sddm.enable = true;
 	services.displayManager.sddm.autoLogin.relogin = true;
 	services.displayManager.autoLogin.user = username;
 	services.displayManager.autoLogin.enable = true;
-	services.desktopManager.plasma6.enable = true;
 	
+    services.desktopManager.plasma6.enable = true;
+	
+    programs.hyprland.enable = true;
+    services.geoclue2.enable = true;
+
+    fonts.packages = with pkgs; [
+        rubik
+        nerd-fonts.ubuntu
+        nerd-fonts.jetbrains-mono
+    ];
 
 
 }

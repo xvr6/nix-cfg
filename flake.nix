@@ -12,21 +12,31 @@
 
 			};
 		};
+        
+        illogical-flake = {
+            url = "github:soymou/illogical-flake";
+            #inputs.nixpkgs.follows = "nixpkgs";
+        };
 
-		nixvim = {
+        stylix = {
+            url = "github:nix-community/stylix/release-25.11";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+		
+        nixvim = {
 			url = "github:nix-community/nixvim/nixos-25.11";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};	
 		
 		home-manager = {
 			url = "github:nix-community/home-manager/release-25.11";
-			inputs.nixpkgs.follows = "nixpkgs";	
+			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
-		# quickshell = {
-		# 	url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-		# 	inputs.nixpkgs.follows = "nixpkgs";
-		# };	
+		quickshell = {
+			url = "github:quickshell-mirror/quickshell";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};	
 
 		zen-browser = {
 			url = "github:0xc000022070/zen-browser-flake";
@@ -39,45 +49,25 @@
 			};
 		};
 
+        #NOTE: wtf do this actually do?
 		self = {
 			submodules = true;
 		};	
 
 	};
 
-outputs = { self, darwin, nixpkgs, home-manager, ... } @inputs: 
+outputs = { self, darwin, nixpkgs, illogical-flake, home-manager, ... } @inputs: 
 	let
-		system = "aarch64-darwin";
+		system = "aarch64-linux";
 		username = "xvr6";
 	in {
 
-# nix-darwin
-		darwinConfigurations = {
-			nixbook = darwin.lib.darwinSystem {
-				inherit system;
-				# username = "prectriv";
-				
-				specialArgs = {inherit inputs system; };
-
-				modules = [ 
-					./modules/hone-manager/shells/zsh.nix
-					./modules/systems/nix-darwin/configuration.nix
-					
-						# ({ config, ... }: {
-						# 	home-manager.users.${username} = {
-						# 		imports = [ ./home.nix ];
-						# 	};
-						# })
-				];
-			};
-		};
-		
 		nixosConfigurations = {
 
 # original UTM VM on my mac
 			nixbook-pro = nixpkgs.lib.nixosSystem {
-				system = "aarch64-linux";
-				specialArgs = { inherit inputs system username; };
+				inherit system;
+                specialArgs = { inherit inputs system username; };
 				modules = [
 					./modules/systems/graphical.nix
 					./modules/systems/nixbook-pro/configuration.nix
@@ -96,7 +86,10 @@ outputs = { self, darwin, nixpkgs, home-manager, ... } @inputs:
 			win-NixVM = nixpkgs.lib.nixosSystem {
 				system = "x86_64-linux";
 				specialArgs = { inherit inputs system username; };
-				modules = [
+				modules = [                 
+                    illogical-flake.homeManagerModules.default {
+                        programs.illogical-impulse.enable = true;
+                    }
 					./modules/systems/graphical.nix
 					./modules/systems/win-nixvm/configuration.nix
 					({ config, ... }: {

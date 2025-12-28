@@ -40,7 +40,7 @@
       #     lualine = {
       #         enable = true;
       #     };
-            
+           #TODO: continue implementing lazygit 
             lazygit = {
                 enable = true;
                 settings = {
@@ -87,4 +87,4 @@
 
 
     };
-} 
+}

@@ -1,4 +1,5 @@
-{
+{ ... } : {
+    
     tokyo-night-default = {
         background = "#1a1b26";
         foreground = "#c0caf5";
