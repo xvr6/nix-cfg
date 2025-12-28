@@ -275,13 +275,13 @@
       "locked": {
         "lastModified": 1765415307,
         "narHash": "sha256-7oV2IIQ9EGCkRANHOI5s6hbhEt/GJlMbI/yqsLOOqsY=",
-        "owner": "soymou",
+        "owner": "xvr6",
         "repo": "illogical-flake",
         "rev": "9436ff4de634c907cea456a8284c164ac6943cfc",
         "type": "github"
       },
       "original": {
-        "owner": "soymou",
+        "owner": "xvr6",
         "repo": "illogical-flake",
         "type": "github"
       }

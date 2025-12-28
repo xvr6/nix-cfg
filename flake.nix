@@ -36,7 +36,7 @@
 
 
         illogical-flake = {
-            url = "github:soymou/illogical-flake";
+            url = "github:xvr6/illogical-flake";
             inputs.nixpkgs.follows = "nixpkgs";
            # inputs.home-manager.follows = "home-manager";
             inputs.quickshell.follows = "quickshell";
@@ -96,6 +96,7 @@ outputs = { self, nixpkgs, illogical-flake, stylix, ... } @inputs:
 
 					({ config, nixpkgs, ... }: {		
                         home-manager = {
+                            overwriteBackup = true;
                             backupFileExtension = "backup";
                             users.${username} = {
                                 imports = [
