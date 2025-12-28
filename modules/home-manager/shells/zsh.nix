@@ -15,13 +15,14 @@
 		};
 
 		shellAliases = {
-			drs = "sudo darwin-rebuild switch --flake ~/.dotfiles#nixbook";
+#			drs = "sudo darwin-rebuild switch --flake ~/.dotfiles#nixbook";
 			hai = "echo hai :3";
 			nrs = "sudo nixos-rebuild switch --flake ~/.dotfiles";
 			nrt = "sudo nixos-rebuild test --flake ~/.dotfiles";
 		};
 	};
- 	programs.ghostty = {
+
+    programs.ghostty = {
 		enable = true;
 		themes = {
 			tokyo-night-default = {
