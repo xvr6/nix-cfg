@@ -2,7 +2,7 @@
 	description = "flakes :3";
 	inputs = {
 		nixpkgs.url = "nixpkgs/nixos-25.11";
-	    nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
+#    nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
 		# for mac
 		darwin = {
 			url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
@@ -13,10 +13,6 @@
 			};
 		};
         
-        illogical-flake = {
-            url = "github:soymou/illogical-flake";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
 
         stylix = {
             url = "github:nix-community/stylix/release-25.11";
@@ -38,6 +34,14 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};	
 
+
+        illogical-flake = {
+            url = "github:soymou/illogical-flake";
+            inputs.nixpkgs.follows = "nixpkgs";
+           # inputs.home-manager.follows = "home-manager";
+            inputs.quickshell.follows = "quickshell";
+        };
+
 		zen-browser = {
 			url = "github:0xc000022070/zen-browser-flake";
 			inputs = {
@@ -56,7 +60,7 @@
 
 	};
 
-outputs = { self, darwin, nixpkgs, illogical-flake, home-manager, ... } @inputs: 
+outputs = { self, nixpkgs, illogical-flake, stylix, ... } @inputs: 
 	let
 		system = "aarch64-linux";
 		username = "xvr6";
@@ -66,7 +70,6 @@ outputs = { self, darwin, nixpkgs, illogical-flake, home-manager, ... } @inputs:
 
 # original UTM VM on my mac
 			nixbook-pro = nixpkgs.lib.nixosSystem {
-				inherit system;
                 specialArgs = { inherit inputs system username; };
 				modules = [
 					./modules/systems/graphical.nix
@@ -86,17 +89,23 @@ outputs = { self, darwin, nixpkgs, illogical-flake, home-manager, ... } @inputs:
 			win-NixVM = nixpkgs.lib.nixosSystem {
 				system = "x86_64-linux";
 				specialArgs = { inherit inputs system username; };
-				modules = [                 
+				modules = [        
+                    stylix.nixosModules.stylix
 					./modules/systems/graphical.nix
 					./modules/systems/win-nixvm/configuration.nix
 
-					({ config, ... }: {
-						home-manager.users.${username} = {
-							imports = [ 
-                                illogical-flake.homeManagerModules.default                                 
-                                ./home.nix 
-                            ];
-						};
+					({ config, nixpkgs, ... }: {		
+                        home-manager = {
+                            backupFileExtension = "backup";
+                            users.${username} = {
+                                imports = [
+                                    illogical-flake.homeManagerModules.default{
+                                        programs.illogical-impulse.enable = true;
+                                    }                                
+                                    ./home.nix 
+                                ];
+						    };
+                        };
 					})
 				];
 			};

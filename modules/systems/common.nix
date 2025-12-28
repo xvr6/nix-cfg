@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, inputs, username, ... }: {
+{ pkgs, system, nixpkgs, inputs, username, ... }: {
 	imports = [
   		inputs.home-manager.nixosModules.home-manager
   	];
@@ -12,8 +12,10 @@
 	};   
 
 	nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+    
+#    pkgs = nixpkgs.legacyPackages.x86_64-linux; #${system};
 
-	#Allow unfree (non-faos)
+    #Allow unfree (non-faos)
 	nixpkgs.config = {
 		allowUnfree = true;
 	};
