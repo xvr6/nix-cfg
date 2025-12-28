@@ -93,11 +93,8 @@ outputs = { self, darwin, nixpkgs, illogical-flake, home-manager, ... } @inputs:
 					({ config, ... }: {
 						home-manager.users.${username} = {
 							imports = [ 
-                                  illogical-flake.homeManagerModules.default {
-                                     programs.illogical-impulse.enable = true;
-                                 }
-
-                            ./home.nix 
+                                illogical-flake.homeManagerModules.default                                 
+                                ./home.nix 
                             ];
 						};
 					})
