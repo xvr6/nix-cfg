@@ -16,7 +16,8 @@
 	
 	#Allow home manager to self manage.
 	programs.home-manager.enable = true;
-    
+    programs.dconf.enable = true;
+
     programs.illogical-impulse = {
         dotfiles = {
         };

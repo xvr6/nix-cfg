@@ -25,8 +25,11 @@
 	
     services.desktopManager.plasma6.enable = true;
 	
+    #end-4 dots
     programs.hyprland.enable = true;
     services.geoclue2.enable = true;
+   
+
 
     fonts.packages = with pkgs; [
         rubik

@@ -2,7 +2,7 @@
 	description = "flakes :3";
 	inputs = {
 		nixpkgs.url = "nixpkgs/nixos-25.11";
-		
+	    nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
 		# for mac
 		darwin = {
 			url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
@@ -15,7 +15,7 @@
         
         illogical-flake = {
             url = "github:soymou/illogical-flake";
-            #inputs.nixpkgs.follows = "nixpkgs";
+            inputs.nixpkgs.follows = "nixpkgs";
         };
 
         stylix = {
@@ -87,14 +87,18 @@ outputs = { self, darwin, nixpkgs, illogical-flake, home-manager, ... } @inputs:
 				system = "x86_64-linux";
 				specialArgs = { inherit inputs system username; };
 				modules = [                 
-                    illogical-flake.homeManagerModules.default {
-                        programs.illogical-impulse.enable = true;
-                    }
 					./modules/systems/graphical.nix
 					./modules/systems/win-nixvm/configuration.nix
+
 					({ config, ... }: {
 						home-manager.users.${username} = {
-							imports = [ ./home.nix ];
+							imports = [ 
+                                  illogical-flake.homeManagerModules.default {
+                                     programs.illogical-impulse.enable = true;
+                                 }
+
+                            ./home.nix 
+                            ];
 						};
 					})
 				];
