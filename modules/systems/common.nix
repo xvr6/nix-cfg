@@ -12,13 +12,6 @@
 	};   
 
 	nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
-    
-#    pkgs = nixpkgs.legacyPackages.x86_64-linux; #${system};
-
-    #Allow unfree (non-faos)
-	nixpkgs.config = {
-		allowUnfree = true;
-	};
 
 	#Enable networking
 	networking.networkmanager.enable = true;
@@ -56,21 +49,25 @@
     environment.systemPackages = with pkgs; [
 		vim
 		wget
-        vscode-fhs
         nix-search-tv
         fzf
+        kitty
     ];
     
-
 	programs.firefox.enable = true;
-
 
 	home-manager.users.${username}.nixpkgs.config = { allowUnfree = true; };
 	home-manager.useUserPackages = true;
 
+    # hyprland
+    programs.hyprland = {
+        enable = true;
+        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    };
+
 	#passing arguments to home.nix :D
 	home-manager.extraSpecialArgs = {
-		inherit inputs; 
-		inherit username;
+		inherit inputs pkgs username;
 	};
 }

@@ -1,4 +1,4 @@
-{ pkgs, username, ...}: {
+{ inputs, pkgs, username, ...}: {
 	imports = [
 		./common.nix
 	];
@@ -24,27 +24,12 @@
             wayland.enable = true;
         };
         autoLogin = {
-            enable = true;
             user = username;
+            enable = true;
         };
     };
-
-
-    # services.desktopManager.plasma6.enable = true;
     
-    programs.hyprland.enable = true;
-    xdg.portal.enable = true;
-    xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    environment.systemPackages = with pkgs; [
-        waybar 
-        hyprpaper #wallpaper manager
-        kitty #default for hyprland
-        dunst #notification manager
-        libnotify #dependancy for abovei
-        
-        rofi # app launcher
-    ];
-
+    services.desktopManager.plasma6.enable = true;
 
     fonts.packages = with pkgs; [
         rubik

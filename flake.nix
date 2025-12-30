@@ -6,7 +6,11 @@
             url = "github:nix-community/stylix/release-25.11";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-		
+        
+        hyprland = {
+            url = "github:hyprwm/Hyprland";
+        };
+            
         nixvim = {
 			url = "github:nix-community/nixvim/nixos-25.11";
 			inputs.nixpkgs.follows = "nixpkgs";
@@ -30,7 +34,7 @@
 
 	};
 
-outputs = { nixpkgs, stylix, ... } @inputs: 
+outputs = { nixpkgs, ... } @inputs: 
 	let
 		system = "aarch64-linux";
 		username = "xvr6";
@@ -59,18 +63,23 @@ outputs = { nixpkgs, stylix, ... } @inputs:
 			win-NixVM = nixpkgs.lib.nixosSystem {
 				system = "x86_64-linux";
 				specialArgs = { inherit inputs system username; };
-				modules = [
-                    stylix.nixosModules.stylix
+				pkgs = import nixpkgs {
+                    system = "x86_64-linux";
+                    config.allowUnfree = true;
+                };
+                modules = [
+                    inputs.hyprland.nixosModules.default
+                    inputs.stylix.nixosModules.stylix
 					./modules/systems/graphical.nix
 					./modules/systems/win-nixvm/configuration.nix
 
-					({ config, nixpkgs, ... }: {		
+					({ ... }: {		
                         home-manager = {
-#                           useGlobalPkgs = true;
                             overwriteBackup = true;
                             backupFileExtension = "backup";
                             users.${username} = {
-                                imports = [                                                                             ./home.nix 
+                                imports = [
+                                    ./home.nix 
                                 ];
 						    };
                         };
