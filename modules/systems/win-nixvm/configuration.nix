@@ -9,13 +9,5 @@
       ./hardware-configuration.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
- 
-  #device hostname
-  networking.hostName = "win-NixVM"; # Define your hostname.
-
   system.stateVersion = "25.11"; # Did you read the comment?
 }

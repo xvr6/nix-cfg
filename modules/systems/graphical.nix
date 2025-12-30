@@ -17,20 +17,23 @@
 	# Enable touchpad support (enabled default in most desktopManager).
 	# services.libinput.enable = true;
 
-    #desktop/window managers or whatchamacallet
-    services.displayManager = {
-        sddm = {
-            enable = true;
-            wayland.enable = true;
-        };
-        autoLogin = {
-            user = username;
-            enable = true;
-        };
+    services.displayManager.sddm.enable = true;
+    services.displayManager.autoLogin = {
+        enable = true;
+        user = username;
     };
     
     services.desktopManager.plasma6.enable = true;
 
+    #desktop/window managers or whatchamacallet
+    services.getty.autologinUser = username;
+    programs.hyprland = {
+        enable = true;
+        xwayland.enable = true;
+    };
+
+  
+   
     fonts.packages = with pkgs; [
         rubik
         nerd-fonts.ubuntu

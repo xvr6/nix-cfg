@@ -1,9 +1,5 @@
 { inputs, pkgs, ... }: {
-	#Install nixvim and dependencies
-	    home.packages = with pkgs; [ #dependencies... none for now?
-    ];
-    
-    imports = [
+     imports = [
 	    inputs.nixvim.homeModules.nixvim
     ];
 

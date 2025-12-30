@@ -2,21 +2,20 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, system, nixpkgs, inputs, username, ... }: {
-	imports = [
-  		inputs.home-manager.nixosModules.home-manager
-  	];
-
+{ pkgs, username, ... }: {
 	nix.settings = {
 		experimental-features = ["nix-command" "flakes"];
 	};   
+  # Use the systemd-boot EFI boot loader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
 
-	nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
 	#Enable networking
 	networking.networkmanager.enable = true;
-
-	#Time Zone
+    networking.hostName = "win-NixVM"; # Define your hostname.
+    
+  	#Time Zone
 	time.timeZone = "America/New_York";
 
 	# Select internationalization properties.
@@ -32,42 +31,30 @@
 	#define user account(s)
 	users = {
         defaultUserShell = pkgs.zsh;
-            users.${username} = {
-                isNormalUser = true;
-                description = username;
-                extraGroups = ["wheel" "podman"];
-                openssh.authorizedKeys.keys = [
-                    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHJuKddbB35VXhD45nRSu6mkGkeZOqup8Cnmfg2dykGP xvr6.dev"
-                ];
-            };
+        users.${username} = {
+            isNormalUser = true;
+            description = username;
+            extraGroups = ["wheel" "podman"];
+            openssh.authorizedKeys.keys = [
+                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHJuKddbB35VXhD45nRSu6mkGkeZOqup8Cnmfg2dykGP xvr6.dev"
+            ];
         };
+    };
 
-	#TODO: remove these
-	# default apps needed for now:
-
-
+	# for both graphical and common
     environment.systemPackages = with pkgs; [
-		vim
+        vim
 		wget
         nix-search-tv
         fzf
+        foot
         kitty
+        waybar
+        hyprpaper
     ];
+
     
 	programs.firefox.enable = true;
-
-	home-manager.users.${username}.nixpkgs.config = { allowUnfree = true; };
-	home-manager.useUserPackages = true;
-
-    # hyprland
-    programs.hyprland = {
-        enable = true;
-        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-    };
-
-	#passing arguments to home.nix :D
-	home-manager.extraSpecialArgs = {
-		inherit inputs pkgs username;
-	};
+  
+    system.stateVersion = "25.11";
 }

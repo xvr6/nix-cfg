@@ -31,59 +31,40 @@
 
 			};
 		};
-
 	};
 
-outputs = { nixpkgs, ... } @inputs: 
+outputs = {nixpkgs, ... } @inputs: 
 	let
-		system = "aarch64-linux";
+		system = "x86_64-linux";
 		username = "xvr6";
 	in {
-
 		nixosConfigurations = {
-
-        # original UTM VM on my mac
-			nixbook-pro = nixpkgs.lib.nixosSystem {
-                specialArgs = { inherit inputs system username; };
-				modules = [
-					./modules/systems/graphical.nix
-					./modules/systems/nixbook-pro/configuration.nix
-					({ config, ... }: {
-						home-manager = {
-							backupFileExtension = "backup";
-							users.${username} = {
-								imports = [ ./home.nix ];
-							};
-						}; 
-					})
-				];
-			};
-
         # Windows Hyper-V VM
 			win-NixVM = nixpkgs.lib.nixosSystem {
-				system = "x86_64-linux";
-				specialArgs = { inherit inputs system username; };
+                inherit system;
 				pkgs = import nixpkgs {
                     system = "x86_64-linux";
                     config.allowUnfree = true;
                 };
-                modules = [
-                    inputs.hyprland.nixosModules.default
-                    inputs.stylix.nixosModules.stylix
-					./modules/systems/graphical.nix
-					./modules/systems/win-nixvm/configuration.nix
 
-					({ ... }: {		
+                # imports for modules basically
+				specialArgs = { inherit inputs system username; };
+                modules = [               
+					./modules/systems/graphical.nix
+					./modules/systems/win-nixvm/hardware-configuration.nix
+                    inputs.home-manager.nixosModules.home-manager
+                    {		
                         home-manager = {
-                            overwriteBackup = true;
+                            useGlobalPkgs = true;
+                            useUserPackages = true;
+                            extraSpecialArgs = { inherit inputs system username; };
+                            users.${username} = import ./home.nix;
+                        #        nixpkgs.config = { allowUnfree = true; };
+                        
+                         #   overwriteBackup = true;
                             backupFileExtension = "backup";
-                            users.${username} = {
-                                imports = [
-                                    ./home.nix 
-                                ];
-						    };
                         };
-					})
+                    }
 				];
 			};
 		};
