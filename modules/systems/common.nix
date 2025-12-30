@@ -38,24 +38,29 @@
 
 	#define user account(s)
 	users = {
-	defaultUserShell = pkgs.zsh;
-		users.${username} = {
-			isNormalUser = true;
-			description = username;
-			extraGroups = ["wheel" "podman"];
-			openssh.authorizedKeys.keys = [
-				"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHJuKddbB35VXhD45nRSu6mkGkeZOqup8Cnmfg2dykGP xvr6.dev"
-			];
-		};
-	};
+        defaultUserShell = pkgs.zsh;
+            users.${username} = {
+                isNormalUser = true;
+                description = username;
+                extraGroups = ["wheel" "podman"];
+                openssh.authorizedKeys.keys = [
+                    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHJuKddbB35VXhD45nRSu6mkGkeZOqup8Cnmfg2dykGP xvr6.dev"
+                ];
+            };
+        };
 
 	#TODO: remove these
 	# default apps needed for now:
-	environment.systemPackages = with pkgs; [
+
+
+    environment.systemPackages = with pkgs; [
 		vim
 		wget
-		vscode-fhs
-	];
+        vscode-fhs
+
+    ];
+    
+
 	programs.firefox.enable = true;
 
 

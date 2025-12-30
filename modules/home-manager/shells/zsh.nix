@@ -19,7 +19,9 @@
 			hai = "echo hai :3";
 			nrs = "sudo nixos-rebuild switch --flake ~/.dotfiles";
 			nrt = "sudo nixos-rebuild test --flake ~/.dotfiles";
-		};
+            ns = "nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history";
+    
+        };
 	};
 
     programs.ghostty = {

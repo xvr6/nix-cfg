@@ -2,17 +2,10 @@
 	description = "flakes :3";
 	inputs = {
 		nixpkgs.url = "nixpkgs/nixos-25.11";
-#    nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
-		# for mac
-		darwin = {
-			url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
-			inputs = {
-				nixpkgs.follows = "nixpkgs";
-				# home-manager.follows = "home-manager";
-
-			};
-		};
-        
+        nix-search-tv = {
+            url = "github:3timeslazy/nix-search-tv";  
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
         stylix = {
             url = "github:nix-community/stylix/release-25.11";
@@ -29,25 +22,12 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
-		quickshell = {
-			url = "github:quickshell-mirror/quickshell";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};	
-
-
-        illogical-flake = {
-            url = "github:xvr6/illogical-flake";
-            inputs.nixpkgs.follows = "nixpkgs";
-           # inputs.home-manager.follows = "home-manager";
-            inputs.quickshell.follows = "quickshell";
-        };
-
 		zen-browser = {
 			url = "github:0xc000022070/zen-browser-flake";
 			inputs = {
 				# IMPORTANT: we're using "libgbm" and is only available in unstable so ensure
 				# to have it up-to-date or simply don't specify the nixpkgs input
-				nixpkgs.follows = "nixpkgs";
+				#nixpkgs.follows = "nixpkgs";
 				home-manager.follows = "home-manager";
 
 			};
@@ -60,7 +40,7 @@
 
 	};
 
-outputs = { self, nixpkgs, illogical-flake, stylix, ... } @inputs: 
+outputs = { self, nixpkgs, stylix, nix-search-tv, ... } @inputs: 
 	let
 		system = "aarch64-linux";
 		username = "xvr6";
@@ -68,7 +48,7 @@ outputs = { self, nixpkgs, illogical-flake, stylix, ... } @inputs:
 
 		nixosConfigurations = {
 
-# original UTM VM on my mac
+        # original UTM VM on my mac
 			nixbook-pro = nixpkgs.lib.nixosSystem {
                 specialArgs = { inherit inputs system username; };
 				modules = [
@@ -85,11 +65,12 @@ outputs = { self, nixpkgs, illogical-flake, stylix, ... } @inputs:
 				];
 			};
 
-# Windows Hyper-V VM
+        # Windows Hyper-V VM
 			win-NixVM = nixpkgs.lib.nixosSystem {
 				system = "x86_64-linux";
 				specialArgs = { inherit inputs system username; };
-				modules = [        
+				modules = [
+                    # nix-search-tv.packages.${system}.default
                     stylix.nixosModules.stylix
 					./modules/systems/graphical.nix
 					./modules/systems/win-nixvm/configuration.nix
@@ -99,11 +80,7 @@ outputs = { self, nixpkgs, illogical-flake, stylix, ... } @inputs:
                             overwriteBackup = true;
                             backupFileExtension = "backup";
                             users.${username} = {
-                                imports = [
-                                    illogical-flake.homeManagerModules.default{
-                                        programs.illogical-impulse.enable = true;
-                                    }                                
-                                    ./home.nix 
+                                imports = [                                                                             ./home.nix 
                                 ];
 						    };
                         };

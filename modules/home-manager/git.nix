@@ -8,7 +8,8 @@
 				name = "xvr6";
 				email = "xvr0612@gmail.com";
 				init.defaultBranch = "main";
-
+                push.autoSetupRemote = true;
+                
 				# #git cred. manager
 				# credential.helper = lib.mkForce ["manager"];
 				# credential.credentialStore = lib.mkForce ["secretservice"];
