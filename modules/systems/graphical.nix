@@ -18,13 +18,34 @@
 	# services.libinput.enable = true;
 
     #desktop/window managers or whatchamacallet
-	services.displayManager.sddm.enable = true;
-	services.displayManager.sddm.autoLogin.relogin = true;
-	services.displayManager.autoLogin.user = username;
-	services.displayManager.autoLogin.enable = true;
+    services.displayManager = {
+        sddm = {
+            enable = true;
+            wayland.enable = true;
+        };
+        autoLogin = {
+            enable = true;
+            user = username;
+        };
+    };
 
-    services.desktopManager.plasma6.enable = true;
- 
+
+    # services.desktopManager.plasma6.enable = true;
+    
+    programs.hyprland.enable = true;
+    xdg.portal.enable = true;
+    xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    environment.systemPackages = with pkgs; [
+        waybar 
+        hyprpaper #wallpaper manager
+        kitty #default for hyprland
+        dunst #notification manager
+        libnotify #dependancy for abovei
+        
+        rofi # app launcher
+    ];
+
+
     fonts.packages = with pkgs; [
         rubik
         nerd-fonts.ubuntu

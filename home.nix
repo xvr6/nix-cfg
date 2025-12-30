@@ -21,6 +21,5 @@
     # Manually move config file from this flake to location expected by system
 	home.file = { 	
         ".config/nixpkgs/config.nix".source = dotfiles/.config/nixpkgs/config.nix;
-       # ".config/ghostty/theme/tokyo-night-default.nix".source = dotfiles/.config/ghostty/theme/tokyo-night-default.nix;
     };
 }
