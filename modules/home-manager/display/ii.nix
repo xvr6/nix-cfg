@@ -1,4 +1,0 @@
-{ ... } : { 
-    # Illogical-Impulse flake config
-
-}
