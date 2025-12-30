@@ -45,7 +45,10 @@
                     };
             };
 
-            
+            telescope = {
+                enable = true;
+            };
+
             nvim-tree = {
                 enable = true;
    	    	    openOnSetup = true;

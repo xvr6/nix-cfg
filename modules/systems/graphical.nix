@@ -19,21 +19,20 @@
 
     services.displayManager.sddm.enable = true;
     services.displayManager.autoLogin = {
-        enable = true;
+        enable = false;
         user = username;
     };
     
     services.desktopManager.plasma6.enable = true;
 
-    #desktop/window managers or whatchamacallet
-    services.getty.autologinUser = username;
+    # desktop/window managers or whatchamacallet
+    # services.getty.autologinUser = username;
     programs.hyprland = {
         enable = true;
         xwayland.enable = true;
     };
 
   
-   
     fonts.packages = with pkgs; [
         rubik
         nerd-fonts.ubuntu
