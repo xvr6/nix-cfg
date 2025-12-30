@@ -2,11 +2,6 @@
 	description = "flakes :3";
 	inputs = {
 		nixpkgs.url = "nixpkgs/nixos-25.11";
-        nix-search-tv = {
-            url = "github:3timeslazy/nix-search-tv";  
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-
         stylix = {
             url = "github:nix-community/stylix/release-25.11";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -33,14 +28,9 @@
 			};
 		};
 
-        #NOTE: wtf do this actually do?
-		self = {
-			submodules = true;
-		};	
-
 	};
 
-outputs = { self, nixpkgs, stylix, nix-search-tv, ... } @inputs: 
+outputs = { nixpkgs, stylix, ... } @inputs: 
 	let
 		system = "aarch64-linux";
 		username = "xvr6";
@@ -70,13 +60,13 @@ outputs = { self, nixpkgs, stylix, nix-search-tv, ... } @inputs:
 				system = "x86_64-linux";
 				specialArgs = { inherit inputs system username; };
 				modules = [
-                    # nix-search-tv.packages.${system}.default
                     stylix.nixosModules.stylix
 					./modules/systems/graphical.nix
 					./modules/systems/win-nixvm/configuration.nix
 
 					({ config, nixpkgs, ... }: {		
                         home-manager = {
+#                           useGlobalPkgs = true;
                             overwriteBackup = true;
                             backupFileExtension = "backup";
                             users.${username} = {

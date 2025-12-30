@@ -3,8 +3,7 @@
         #./modules/home-manager/stylix.nix
 		./modules/home-manager/nixvim.nix
 		./modules/home-manager/shells/zsh.nix
-		./modules/home-manager/git.nix
-	    ./modules/home-manager/display/ii.nix
+		./modules/home-manager/git.nix 
         # TODO: ./modules/home-manager/browsers/zen.nix
 	];
 	
@@ -16,6 +15,7 @@
 	programs.home-manager.enable = true;
 
  	home.packages = with pkgs; [  
+        (pkgs.writeShellScriptBin "ns" (builtins.readFile "${pkgs.nix-search-tv.src}/nixpkgs.sh"))
     ];
 
     # Manually move config file from this flake to location expected by system

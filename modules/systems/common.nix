@@ -57,7 +57,8 @@
 		vim
 		wget
         vscode-fhs
-
+        nix-search-tv
+        fzf
     ];
     
 
