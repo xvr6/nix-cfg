@@ -23,9 +23,10 @@
 	services.displayManager.autoLogin.user = username;
 	services.displayManager.autoLogin.enable = true;
 	
-    services.desktopManager.plasma6.enable = true;
+    #services.desktopManager.plasma6.enable = true;
 	
     #end-4 dots
+    services.displayManager.sddm.wayland.enable = true; 
     programs.hyprland.enable = true;
     services.geoclue2.enable = true;
    
