@@ -1,12 +1,5 @@
 { pkgs, ... }: {
    
-    wayland.windowManager.hyprland = {
-        enable = true;
-        package = null;
-        portalPackage = null;
-    };
-
-
 #   xdg.portal.enable = true;
 #   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     home.packages = with pkgs; [
@@ -19,6 +12,14 @@
         
         rofi # app launcher
     ];
+    
+    wayland.windowManager.hyprland = {
+        enable = true;
+        package = null;
+        portalPackage = null;
+    };
+
+
 
 
 }

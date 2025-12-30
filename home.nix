@@ -4,7 +4,7 @@
 		./modules/home-manager/nixvim.nix
 		./modules/home-manager/shells/zsh.nix
 		./modules/home-manager/git.nix 
-        #./modules/home-manager/display/hypr.nix
+        ./modules/home-manager/display/hypr.nix
         # TODO: ./modules/home-manager/browsers/zen.nix
 	];
 	
@@ -14,12 +14,6 @@
  					     	 
 	# Allow home manager to self manage.
 	programs.home-manager.enable = true;
-    programs.kitty.enable = true;
-    wayland.windowManager.hyprland = {
-        enable = true;
-        package = null;
-        portalPackage = null;
-    };
 
  	home.packages = with pkgs; [  
         (pkgs.writeShellScriptBin "ns" (builtins.readFile "${pkgs.nix-search-tv.src}/nixpkgs.sh"))
