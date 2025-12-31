@@ -39,10 +39,37 @@ outputs = {nixpkgs, ... } @inputs:
 		username = "xvr6";
 	in {
 		nixosConfigurations = {
+	
+		nixbook-pro = nixpkgs.lib.nixosSystem {
+			inherit system;
+			pkgs = import nixpkgs {
+				system = "aarch64-linux";
+				config.allowUnfree = true;
+			};
+			specialArgs = {inherit inputs system username; };
+			modules = [
+				./modules/systems/graphical.nix
+				./modules/systems/nixbook-pro/configuration.nix
+				inputs.home-manager.nixosModules.home-manager
+				{
+					home-manager = {
+					    useGlobalPkgs = true;
+					    useUserPackages = true;
+					    extraSpecialArgs = { inherit inputs system username; };
+					    users.${username} = import ./home.nix;
+					    backupFileExtension = "backup";
+					};
+				}
+				];
+			
+		};
+
+
+		
         # Windows Hyper-V VM
-			win-NixVM = nixpkgs.lib.nixosSystem {
+		win-NixVM = nixpkgs.lib.nixosSystem {
                 inherit system;
-				pkgs = import nixpkgs {
+		pkgs = import nixpkgs {
                     system = "x86_64-linux";
                     config.allowUnfree = true;
                 };
@@ -51,7 +78,7 @@ outputs = {nixpkgs, ... } @inputs:
 				specialArgs = { inherit inputs system username; };
                 modules = [               
 					./modules/systems/graphical.nix
-					./modules/systems/win-nixvm/hardware-configuration.nix
+					./modules/systems/win-nixvm/configuration.nix
                     inputs.home-manager.nixosModules.home-manager
                     {		
                         home-manager = {

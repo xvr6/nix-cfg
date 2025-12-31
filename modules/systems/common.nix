@@ -13,7 +13,6 @@
 
 	#Enable networking
 	networking.networkmanager.enable = true;
-    networking.hostName = "win-NixVM"; # Define your hostname.
     
   	#Time Zone
 	time.timeZone = "America/New_York";
