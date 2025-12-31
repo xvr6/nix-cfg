@@ -26,7 +26,7 @@
 
     programs.ghostty = {
 		enable = true;
-        themes = import ./theme/tokyo-night-dark.nix {};
+        themes = import ../themes/tokyo-night-dark.nix{};
 
     
         settings = {

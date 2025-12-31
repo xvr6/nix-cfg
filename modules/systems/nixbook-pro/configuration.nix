@@ -9,11 +9,6 @@
       ./hardware-configuration.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
- 
   #device hostname
   networking.hostName = "nixbook-pro"; # Define your hostname.
 
