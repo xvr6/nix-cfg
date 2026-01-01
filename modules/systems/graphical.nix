@@ -22,7 +22,7 @@
         enable = false;
         user = username;
     };
-    
+   
     services.desktopManager.plasma6.enable = true;
 
     # desktop/window managers or whatchamacallet
@@ -31,8 +31,5 @@
         enable = true;
         xwayland.enable = true;
     };
-
-  
-
 
 }

@@ -9,8 +9,6 @@
     	vimAlias = true;
 	    defaultEditor = true;
 
-    	# globals.mapleader = "~~~~";
-	
 	    #nvim options
     	opts = {
 		    #line numbers
@@ -28,19 +26,14 @@
     	};
 	
 	    plugins = {
-      #     lualine = {
-      #         enable = true;
-      #     };
-           #TODO: continue implementing lazygit 
+            # TODO: continue implementing lazygit and the 2 plugins below.
             lazygit = {
                 enable = false;
                 settings = {
                     floating_window_winblend = 0;
                     floating_window_scaling_factor = 0.9;
-                    };
+                };
             };
-
-            todo-comments.enable = true;
 
             telescope = {
                 enable = true;
@@ -51,38 +44,33 @@
    	    	    openOnSetup = true;
    		    	openOnSetupFile = true;
         	};
-	        
-           # nvim-cmp = { 
-            #    enable = true;
-              #  autoEnableSources = true;
-             #   sources = [
-               #     {name = "nvim_lsp";}
-##                    {name = "path";}
-                #];
-            #};
-    
-            lightline.enable = true;
-		    
-            web-devicons = { # required by nvim-tree
-    	   		enable = true;	
-    		};
+		    # nvim tree dependancy
+            web-devicons.enable = true;	
 
-            highlight-colors.enable = true;
-
-	    	lsp = {
-		    	enable = true;
-			    servers = {
-			    	nixd.enable = true;
-		    	};
-	    	};
-            
-            lsp-status = {
+            # -- Completion --
+            cmp = {
                 enable = true;
+                autoEnableSources = true;
+                settings.soruces = [
+                    { name = "nvim_lsp"; }
+                    { name = "path"; }
+                    { name = "buffer"; }
+                ];
             };
 
-    };
 
+            # -- Language Server Protocol --
+	    	lsp.enable = true;
+            lsp.servers = {
+			    nixd.enable = true;
+                vue_ls.enable = true;
 
+		    };
 
+            # -- Cosmetic Tweaks --
+            todo-comments.enable = true;
+            lightline.enable = true;
+            highlight-colors.enable = true;
+        };
     };
 }
