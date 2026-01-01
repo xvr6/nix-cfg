@@ -33,12 +33,14 @@
       #     };
            #TODO: continue implementing lazygit 
             lazygit = {
-                enable = true;
+                enable = false;
                 settings = {
                     floating_window_winblend = 0;
                     floating_window_scaling_factor = 0.9;
                     };
             };
+
+            todo-comments.enable = true;
 
             telescope = {
                 enable = true;

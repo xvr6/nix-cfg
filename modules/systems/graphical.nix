@@ -33,11 +33,6 @@
     };
 
   
-    fonts.packages = with pkgs; [
-        rubik
-        nerd-fonts.ubuntu
-        nerd-fonts.jetbrains-mono
-    ];
 
 
 }

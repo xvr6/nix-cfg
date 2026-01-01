@@ -53,7 +53,12 @@
     ];
 
     
-	programs.firefox.enable = true;
+    fonts.packages = with pkgs; [
+        rubik
+        nerd-fonts.jetbrains-mono
+    ];
+	
+    programs.firefox.enable = true;
   
     system.stateVersion = "25.11";
 }

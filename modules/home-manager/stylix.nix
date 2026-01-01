@@ -2,6 +2,8 @@
      imports = [
 	    inputs.stylix.homeModules.stylix
     ];
+    
+    
     stylix = {
         enable = true;
         polarity = "dark";
@@ -10,5 +12,18 @@
         #base16Scheme = "~/.dotfiles/dotfiles/theme.yaml";
 
         base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
-    };   
+   
+        fonts = {
+            serif = {
+                package = pkgs.rubik;
+                name = "rubik";
+            };
+            monospace = {
+                package = pkgs.nerd-fonts.jetbrains-mono;
+                name = "jetbrains-mono";
+            };
+
+        };
+
+   };   
 }
