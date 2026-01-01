@@ -26,11 +26,8 @@
 
     programs.ghostty = {
 		enable = true;
-        themes = import ../themes/tokyo-night-dark.nix{};
-
     
         settings = {
-			theme = "tokyo-night-dark";
 			font-size = 10;
 		};
 

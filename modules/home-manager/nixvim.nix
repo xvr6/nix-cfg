@@ -27,11 +27,6 @@
 		    smartindent = true;
     	};
 	
-        colorschemes.tokyonight = {
-            enable = true;
-            settings.style = "night";
-        };
-
 	    plugins = {
       #     lualine = {
       #         enable = true;
@@ -69,6 +64,8 @@
             web-devicons = { # required by nvim-tree
     	   		enable = true;	
     		};
+
+            highlight-colors.enable = true;
 
 	    	lsp = {
 		    	enable = true;

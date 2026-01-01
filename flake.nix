@@ -87,6 +87,7 @@ outputs = {nixpkgs, ... } @inputs:
                                 extraSpecialArgs = { inherit inputs system username; };
                                 users.${username} = import ./home.nix;
                                 backupFileExtension = "backup";
+                        	    overwriteBackup = true;
                             };
                         }
                     ];
