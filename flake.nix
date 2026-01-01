@@ -58,7 +58,8 @@ outputs = {nixpkgs, ... } @inputs:
                             extraSpecialArgs = { inherit inputs system username; };
                             users.${username} = import ./home.nix;
                             backupFileExtension = "backup";
-                        };
+                        	overwriteBackup = true;
+			};
                     }
                 ];
                 
@@ -81,7 +82,7 @@ outputs = {nixpkgs, ... } @inputs:
                         inputs.home-manager.nixosModules.home-manager
                         {		
                             home-manager = {
-                                useGlobalPkgs = true;
+                               # useGlobalPkgs = true;
                                 useUserPackages = true;
                                 extraSpecialArgs = { inherit inputs system username; };
                                 users.${username} = import ./home.nix;
