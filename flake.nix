@@ -119,6 +119,5 @@ outputs = {nixpkgs, ... } @inputs:
                     ];
                 };
             };
-            };
         };
 }
