@@ -2,6 +2,7 @@
 	description = "flakes :3";
 	inputs = {
 		nixpkgs.url = "nixpkgs/nixos-25.11";
+        nixos-hardware.url = "github:NixOS/nixos-hardware/master";
         stylix = {
             url = "github:nix-community/stylix/release-25.11";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -39,7 +40,35 @@ outputs = {nixpkgs, ... } @inputs:
 		username = "xvr6";
 	in {
 		nixosConfigurations = {
-            #macbook vm
+        
+        #framework flake!
+            nixwork = nixpkgs.lib.nixosSystem {
+                    inherit system;
+                    pkgs = import nixpkgs {
+                        system = "x86_64-linux";
+                        config.allowUnfree = true;
+                    };
+
+                    # imports for modules basically
+                    specialArgs = { inherit inputs system username; };
+                    modules = [  
+                        ./modules/systems/graphical.nix
+                        ./modules/systems/nixwork/configuration.nix
+                        inputs.home-manager.nixosModules.home-manager
+                        {		
+                            home-manager = {
+                               # useGlobalPkgs = true;
+                                useUserPackages = true;
+                                extraSpecialArgs = { inherit inputs system username; };
+                                users.${username} = import ./home.nix;
+                                backupFileExtension = "backup";
+                        	    overwriteBackup = true;
+                            };
+                        }
+                    ];
+                };
+
+#Macbook vm
             nixbook-pro = nixpkgs.lib.nixosSystem {
                 inherit system;
                 pkgs = import nixpkgs {
@@ -59,7 +88,7 @@ outputs = {nixpkgs, ... } @inputs:
                             users.${username} = import ./home.nix;
                             backupFileExtension = "backup";
                         	overwriteBackup = true;
-			};
+            			};
                     }
                 ];
                 
@@ -93,31 +122,6 @@ outputs = {nixpkgs, ... } @inputs:
                     ];
                 };
 
-            nixwork = nixpkgs.lib.nixosSystem {
-                    inherit system;
-                    pkgs = import nixpkgs {
-                        system = "x86_64-linux";
-                        config.allowUnfree = true;
-                    };
-
-                    # imports for modules basically
-                    specialArgs = { inherit inputs system username; };
-                    modules = [               
-                        ./modules/systems/graphical.nix
-                        ./modules/systems/nixwork/configuration.nix
-                        inputs.home-manager.nixosModules.home-manager
-                        {		
-                            home-manager = {
-                               # useGlobalPkgs = true;
-                                useUserPackages = true;
-                                extraSpecialArgs = { inherit inputs system username; };
-                                users.${username} = import ./home.nix;
-                                backupFileExtension = "backup";
-                        	    overwriteBackup = true;
-                            };
-                        }
-                    ];
-                };
             };
         };
 }
