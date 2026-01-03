@@ -12,7 +12,10 @@
     #bios tool
     services.fwupd.enable = true;
     boot.kernelPackages = pkgs.linuxPackages_latest;
+    #TODO: get screen brightness control working
+    programs.light.enable = true;
 
+    
     networking.hostName = "nixwork"; # Define your hostname.
     system.stateVersion = "25.11"; # Did you read the comment?
 }
