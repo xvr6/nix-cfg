@@ -3,6 +3,19 @@
 		./common.nix
 	];
 
+    environment.systemPackages = with pkgs; [
+        waybar
+        
+        #walpaper manager
+        swww
+
+        #app launcher
+        rofi
+
+        #notification daemon
+        dunst
+        libnotify
+    ];
 	# Enable CUPS to print documents.
 	# services.printing.enable = true;
 
@@ -35,28 +48,9 @@
     xdg.portal.enable = true;
     xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
-    environment.systemPackages = with pkgs; [
-        waybar
-        
-        #walpaper manager
-        swww
-
-        #app launcher
-        rofi
-
-        #notification daemon
-        dunst
-        libnotify
-    ];
     
     environment.sessionVariables = {
         #Hint electron apps use wayland
         NIXOS_OZONE_WL = "1";
     };
-    
-    hardware = {
-        opengl.enable = true;
-
-    };
-
 }

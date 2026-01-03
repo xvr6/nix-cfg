@@ -48,8 +48,6 @@
         fzf
         foot
         kitty
-        waybar
-        hyprpaper
     ];
 
     

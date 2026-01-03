@@ -56,7 +56,7 @@ outputs = {nixpkgs, ... } @inputs:
                     # imports for modules basically
                     specialArgs = { inherit inputs system username; };
                     modules = [  
-                        inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series 
+                        inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
                         ./modules/systems/nixwork/configuration.nix
                         ./modules/systems/graphical.nix
                         inputs.home-manager.nixosModules.home-manager
@@ -75,33 +75,7 @@ outputs = {nixpkgs, ... } @inputs:
                     ];
                 };
 
-#Macbook vm
-            nixbook-pro = nixpkgs.lib.nixosSystem {
-                inherit system;
-                pkgs = import nixpkgs {
-                   # system = "aarch64-linux";
-                    config.allowUnfree = true;
-                };
-                specialArgs = {inherit inputs system username; };
-                modules = [
-                    ./modules/systems/graphical.nix
-                    ./modules/systems/nixbook-pro/configuration.nix
-                    inputs.home-manager.nixosModules.home-manager
-                    {
-                        home-manager = {
-                            useGlobalPkgs = true;
-                            useUserPackages = true;
-                            extraSpecialArgs = { inherit inputs system username; };
-                            users.${username} = import ./home.nix;
-                            backupFileExtension = "backup";
-                        	overwriteBackup = true;
-            			};
-                    }
-                ];
-                
-            };
-
-            
+       
             # Windows Hyper-V VM
             win-NixVM = nixpkgs.lib.nixosSystem {
                     inherit system;
