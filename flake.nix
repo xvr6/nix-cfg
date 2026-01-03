@@ -52,15 +52,17 @@ outputs = {nixpkgs, ... } @inputs:
                     # imports for modules basically
                     specialArgs = { inherit inputs system username; };
                     modules = [  
-                        ./modules/systems/graphical.nix
                         ./modules/systems/nixwork/configuration.nix
+                        ./modules/systems/graphical.nix
                         inputs.home-manager.nixosModules.home-manager
                         {		
                             home-manager = {
                                # useGlobalPkgs = true;
                                 useUserPackages = true;
+                                
                                 extraSpecialArgs = { inherit inputs system username; };
                                 users.${username} = import ./home.nix;
+                        
                                 backupFileExtension = "backup";
                         	    overwriteBackup = true;
                             };
