@@ -19,8 +19,9 @@ imports = [
     # Manually move config file from this flake to location expected by system
 	home.file = { 	
         ".config/nixpkgs/config.nix".source = dotfiles/.config/nixpkgs/config.nix;
-    };
-					     	 
+        ".config/hypr/hyprland.conf".source = dotfiles/.config/hypr/hyprland.conf;
+        ".config/hypr/start.sh".source = dotfiles/.config/hypr/start.sh;
+    };					     	 
 	# Home manager to self manage.
 	programs.home-manager = {
         enable = true;

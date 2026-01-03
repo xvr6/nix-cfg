@@ -2,7 +2,10 @@
 	description = "flakes :3";
 	inputs = {
 		nixpkgs.url = "nixpkgs/nixos-25.11";
-        nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+        nixos-hardware = {
+            url = "github:NixOS/nixos-hardware/master";
+        };
+        
         stylix = {
             url = "github:nix-community/stylix/release-25.11";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -10,6 +13,7 @@
         
         hyprland = {
             url = "github:hyprwm/Hyprland";
+            inputs.nixpkgs.follows = "nixpkgs";
         };
             
         nixvim = {
