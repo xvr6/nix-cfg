@@ -9,6 +9,11 @@
       ./hardware-configuration.nix
     ];
 
+    environment.systemPackages = with pkgs; [
+       #screen brightness adjustment
+       brightnessctl
+    ];
+
     #firmware update tool
     services.fwupd = {
         enable = true;
@@ -17,11 +22,11 @@
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
     
-    #TODO: get screen brightness control working
-    programs.light.enable = true;
-
-    
-    #Sound with Pipewire
+    #Sound
+    hardware.pulseaudio = {
+        enable = false;
+        extraConfig = "load-module module-combine-sink";
+    };
     services.pipewire = {
         enable = true;
         alsa = {
@@ -32,11 +37,15 @@
    };
     
     #Bluetooth
-    hardware.bluetooth.settings = {
-        General = {
-            Experimental = true;
-        }; 
+    hardware.bluetooth = {
+        enable = true;
+        settings = {
+            General = {
+                Experimental = true;
+            };   
+        };
     };
+    services.blueman.enable = true;
     
     networking.hostName = "nixwork"; # Define your hostname.
     system.stateVersion = "25.11"; # Did you read the comment?
