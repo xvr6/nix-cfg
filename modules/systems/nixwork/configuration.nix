@@ -9,12 +9,34 @@
       ./hardware-configuration.nix
     ];
 
-    #bios tool
-    services.fwupd.enable = true;
+    #firmware update tool
+    services.fwupd = {
+        enable = true;
+        extraRemotes = ["lvfs-testing"];
+    };
+
     boot.kernelPackages = pkgs.linuxPackages_latest;
+    
     #TODO: get screen brightness control working
     programs.light.enable = true;
 
+    
+    #Sound with Pipewire
+    services.pipewire = {
+        enable = true;
+        alsa = {
+            enable = true;
+            support32Bit = true;
+        };
+        pulse.enable = true;
+   };
+    
+    #Bluetooth
+    hardware.bluetooth.settings = {
+        General = {
+            Experimental = true;
+        }; 
+    };
     
     networking.hostName = "nixwork"; # Define your hostname.
     system.stateVersion = "25.11"; # Did you read the comment?

@@ -13,7 +13,8 @@
 
 	#Enable networking
 	networking.networkmanager.enable = true;
-    
+    networking.nameservers = ["1.1.1.1" "8.8.8.8"];
+
   	#Time Zone
 	time.timeZone = "America/New_York";
 
@@ -24,8 +25,8 @@
 	services.openssh.enable = true;
 
 	# Select shell
-	environment.shells = [pkgs.zsh];
 	programs.zsh.enable = true;
+	environment.shells = [pkgs.zsh];
 
 	#define user account(s)
 	users = {
@@ -38,6 +39,7 @@
                 "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHJuKddbB35VXhD45nRSu6mkGkeZOqup8Cnmfg2dykGP xvr6.dev"
             ];
         };
+
     };
 
 	# for both graphical and common
