@@ -10,8 +10,7 @@
     ];
 
     environment.systemPackages = with pkgs; [
-       #screen brightness adjustment
-       brightnessctl
+    
     ];
 
     #firmware update tool
@@ -45,7 +44,6 @@
             };   
         };
     };
-    services.blueman.enable = true;
     
     networking.hostName = "nixwork"; # Define your hostname.
     system.stateVersion = "25.11"; # Did you read the comment?

@@ -1,6 +1,6 @@
 { inputs, pkgs, username, ...}: {
 	imports = [
-		./common.nix
+		../common.nix
 	];
 
     environment.systemPackages = with pkgs; [
@@ -12,34 +12,20 @@
         #app launcher
         rofi
 
+        #screen brightness adjustment
+        brightnessctl
+       
         #notification daemon
         dunst
         libnotify
     ];
-	# Enable CUPS to print documents.
-	# services.printing.enable = true;
-
-	# Enable sound.
-	# services.pulseaudio.enable = true;
-	# OR
-	# services.pipewire = {
-	#   enable = true;
-	#   pulse.enable = true;
-	# };
-
-	# Enable touchpad support (enabled default in most desktopManager).
-	# services.libinput.enable = true;
-
-    services.displayManager.sddm.enable = true;
+	
+    services.displayManager.sddm.wayland.enable = true;
+    
     services.displayManager.autoLogin = {
-        enable = false;
+        enable = true;
         user = username;
     };
-   
-    services.desktopManager.plasma6.enable = true;
-
-    # desktop/window managers or whatchamacallet
-    # services.getty.autologinUser = username;
     programs.hyprland = {
         enable = true;
         xwayland.enable = true;
@@ -54,3 +40,4 @@
         NIXOS_OZONE_WL = "1";
     };
 }
+

@@ -56,8 +56,8 @@ outputs = {nixpkgs, ... } @inputs:
                     specialArgs = { inherit inputs system username; };
                     modules = [  
                         inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
-                        ./modules/systems/nixwork/configuration.nix
-                        ./modules/systems/graphical.nix
+                        ./modules/systems/hardware/nixwork/configuration.nix
+                        ./modules/systems/desktops/hypr.nix
                         inputs.home-manager.nixosModules.home-manager
                         {		
                             home-manager = {

@@ -28,7 +28,13 @@
 	programs.zsh.enable = true;
 	environment.shells = [pkgs.zsh];
 
-	#define user account(s)
+    # Trackpad support
+    services.libinput.enable = true;
+    
+    #allows switching between desktop managers
+    services.displayManager.sddm.enable = true;
+
+    #define user account(s)
 	users = {
         defaultUserShell = pkgs.zsh;
         users.${username} = {
@@ -49,7 +55,6 @@
         nix-search-tv
         fzf
         foot
-        kitty
     ];
 
     
