@@ -23,7 +23,7 @@
     boot.kernelPackages = pkgs.linuxPackages_latest;
     
     #Sound
-    hardware.pulseaudio = {
+    services.pulseaudio = {
         enable = false;
         extraConfig = "load-module module-combine-sink";
     };
