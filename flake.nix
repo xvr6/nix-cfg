@@ -9,11 +9,11 @@
             url = "github:nix-community/stylix/release-25.11";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        
-        hyprland = {
-            url = "github:hyprwm/Hyprland";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
+       
+       #hyprland = {
+       #    url = "github:hyprwm/Hyprland";
+       #    inputs.nixpkgs.follows = "nixpkgs";
+       #};
             
         nixvim = {
 			url = "github:nix-community/nixvim/nixos-25.11";
@@ -57,7 +57,7 @@ outputs = {nixpkgs, ... } @inputs:
                     modules = [  
                         inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
                         ./modules/systems/hardware/nixwork/configuration.nix
-                        ./modules/systems/desktops/hypr.nix
+                        ./modules/systems/desktops/hyprland.nix
                         inputs.home-manager.nixosModules.home-manager
                         {		
                             home-manager = {
