@@ -1,10 +1,9 @@
 { inputs, pkgs, username, ... }: {
 imports = [
-    ./modules/home-manager/stylix.nix
+    #./modules/home-manager/stylix.nix
 	./modules/home-manager/nixvim.nix
 	./modules/home-manager/shells/zsh.nix
 	./modules/home-manager/git.nix 
-    #./modules/home-manager/display/hypr.nix
     ./modules/home-manager/browsers/zen.nix
 ];
 

@@ -58,10 +58,47 @@
     ];
 
     
-    fonts.packages = with pkgs; [
-        rubik
-        nerd-fonts.jetbrains-mono
-    ];
+    fonts = {
+        packages = with pkgs; [
+            #Nerd Fonts
+            maple-mono.NF
+            nerd-fonts.jetbrains-mono
+
+            #Normal Fonts
+            noto-fonts
+            noto-fonts-color-emoji
+ 
+            #TODO remove if not needed
+            rubik 
+          
+        ];
+
+        fontDir.enable = true;
+        
+        fontconfig = {
+            enable = true;
+            antialias = true;
+            defaultFonts = {
+                monospace = [
+                    "JetBrainsMono Nerd Font"
+                    "Maple Mono NF"
+                    "Noto Mono"
+                    "DejaVu Sans Mono" # Default
+                ];
+                sansSerif = [
+                    "Noto Sans"
+                    "DejaVu Sans" # Default
+                ];
+                serif = [
+                    "Noto Serif"
+                    "DejaVu Serif" # Default
+                ];
+                emoji = [
+                    "Noto Color Emoji"
+                ];
+            };
+        };
+    };
 	
     programs.firefox.enable = true;
   
