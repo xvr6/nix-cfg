@@ -57,6 +57,7 @@ outputs = {nixpkgs, ... } @inputs:
                     modules = [  
                         inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
                         ./modules/systems/hardware/nixwork/configuration.nix
+                        ./modules/systems/common.nix
                         ./modules/hyprland
                         inputs.home-manager.nixosModules.home-manager
                         {		
